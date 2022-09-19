@@ -1,0 +1,5 @@
+parameters:
+  app.bitcoin.host: "%env(BITCOIN_CORE_HOST)%"
+  app.bitcoin.port: "%env(BITCOIN_CORE_PORT)%"
+  app.bitcoin.username: "%env(BITCOIN_CORE_USERNAME)%"
+  app.bitcoin.password: "%env(BITCOIN_CORE_PASSWORD)%"

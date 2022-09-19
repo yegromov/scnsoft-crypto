@@ -15,8 +15,7 @@
         "symfony/flex": "^2",
         "symfony/framework-bundle": "6.1.*",
         "symfony/runtime": "6.1.*",
-        "symfony/yaml": "6.1.*",
-        "digitaldonkey/ethereum-php": "dev-master"
+        "symfony/yaml": "6.1.*"
     },
     "config": {
         "allow-plugins": {
@@ -41,12 +40,6 @@
             "App\\Tests\\": "tests/"
         }
     },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/digitaldonkey/ethereum-php.git"
-        }
-    ],
     "replace": {
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",

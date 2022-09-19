@@ -2,16 +2,28 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Denpa\Bitcoin\Client as BitcoinClient;
+use Web3\Web3;
+use Web3\Providers\HttpProvider;
+use Web3\RequestManagers\HttpRequestManager;
 
-class CryptoController
+class CryptoController extends AbstractController
 {
     #[Route('/bitcoin')]
     public function bitcoin(): Response
-    {
-        $bitcoind = new BitcoinClient('http://rpcuser:rpcpassword@localhost:8332/');
+    {   
+        $bitcoinHost = $this->getParameter('app.bitcoin.host');
+        $bitcoinPort = $this->getParameter('app.bitcoin.port');
+        $bitcoinUser = $this->getParameter('app.bitcoin.username');
+        $bitcoinPassword = $this->getParameter('app.bitcoin.password');
+
+        $bitcoind = new BitcoinClient('http://'.$bitcoinUser.':'.$bitcoinPassword.'@'.$bitcoinHost.':'.$bitcoinPort.'/');
+        
+        $data = $bitcoind->getBlockChainInfo();
+        $blockChainInfo = json_encode($data, JSON_PRETTY_PRINT);
 
         $block = $bitcoind->getBlock('000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f');
 
@@ -29,14 +41,24 @@ class CryptoController
         $block('tx')->first();     // txid of first transaction
         $block('tx')->last();      // txid of last transaction
 
+        $blockdata = print_r($block, true);
+
+
         return new Response(
-            '<html><body>Bitcoin</body></html>'
+            '<html><body>Bitcoin <pre>' . $blockChainInfo . '</pre></body></html>'
         );
     }
 
     #[Route('/eth')]
     public function eth(): Response
     {
+        $web3 = new Web3(new HttpProvider(new HttpRequestManager("ADD_YOUR_ETHEREUM_NODE_URL")));
+
+        $eth = $web3->eth;
+
+        $eth->blockNumber(function ($err, $data) {
+            echo "Latest block number is: " . $data . " \n";
+        });
         return new Response(
             '<html><body>Eth</body></html>'
         );

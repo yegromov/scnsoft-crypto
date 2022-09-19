@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ef54ac7021e17202c73918dcafd6547f",
+    "content-hash": "6feabc9a310b22fe486884f13061d526",
     "packages": [
         {
             "name": "denpa/php-bitcoinrpc",
@@ -2953,7 +2953,7 @@
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
